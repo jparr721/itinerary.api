@@ -19,14 +19,30 @@ exports.write = (url, json) => {
   });
 };
 
-exports.createUser = (uuid) => {
+exports.createUser = (uuid, name, email) => {
     return new Promise((resolve, reject) => {
         exports.database.ref('users/' + uuid).set({
-            id: uuid
+            id: uuid,
+            name: name,
+            email: email
         }).then((snapshot) => {
             resolve(snapshot);
         }, (err) => {
             reject(err);
         });
     });
+};
+
+exports.exists = (uuid) => {
+  return new Promise((resolve, reject) => {
+     exports.database.ref('users/' + uuid).once('value').then((snapshot) => {
+         if (snapshot.val() && snapshot.val().name) {
+             resolve(true);
+         } else {
+             resolve(false);
+         }
+     }, (err) => {
+         reject(err);
+     });
+  });
 };

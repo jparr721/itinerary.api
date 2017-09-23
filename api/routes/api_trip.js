@@ -26,7 +26,8 @@ router.post('component/add', (req, res) => {
     if (req.body.component_id && req.body.place && req.body.trip_id) {
         firebase.write('trips/' + req.body.trip_id + "/" + req.body.component_id, {
             id: req.body.component_id,
-            place: req.body.place
+            place: req.body.place,
+            type: req.body.type
         }).then((snapshot) => {
             res.send({status: "OK"});
             return;
