@@ -1,0 +1,29 @@
+{
+  "name": "itinerary-api",
+  "version": "1.0.0",
+  "description": "API for makemytravelguide.com",
+  "main": "api/api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jparr721/itinerary.api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jparr721/itinerary.api/issues"
+  },
+  "homepage": "https://github.com/jparr721/itinerary.api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "firebase": "^4.4.0",
+    "firebase-admin": "^5.2.1",
+    "helmet": "^3.8.1",
+    "path": "^0.12.7"
+  }
+}
