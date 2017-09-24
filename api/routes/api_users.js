@@ -30,4 +30,24 @@ router.get("/:id/exists", (req, res) => {
     });
 });
 
+router.get("/:id/trips", (req, res) => {
+    firebase.read('users/' + req.params.id + '/trips').then((data) => {
+        res.send(data);
+        return;
+    }, (err) => {
+        res.status(503).send(error_handler.errorJSON(req.originalUrl, err, "Error connecting to server."));
+        return;
+    });
+});
+
+router.get("/:id/trips/:trip_id", (req, res) => {
+    firebase.read('users/' + req.params.id + '/trips' + req.params.trip_id).then((data) => {
+        res.send(data);
+        return;
+    }, (err) => {
+        res.status(503).send(error_handler.errorJSON(req.originalUrl, err, "Error connecting to server."));
+        return;
+    });
+});
+
 module.exports = router;

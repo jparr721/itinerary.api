@@ -11,11 +11,21 @@ exports.database = app_config.database();
 
 exports.write = (url, json) => {
   return new Promise((resolve, reject) => {
-      exports.database.ref(url).set(json).then((snapshot) => {
+      exports.database.ref(url).update(json).then((snapshot) => {
           resolve(snapshot);
       }, (err) => {
           reject(err);
       });
+  });
+};
+
+exports.read = (url) => {
+  return new Promise((resolve, reject) => {
+     exports.database.ref(url).once('value').then((snapshot) => {
+         resolve(snapshot.val());
+     }, (err) => {
+         reject(err);
+     });
   });
 };
 
@@ -36,7 +46,7 @@ exports.createUser = (uuid, name, email) => {
 exports.exists = (uuid) => {
   return new Promise((resolve, reject) => {
      exports.database.ref('users/' + uuid).once('value').then((snapshot) => {
-         if (snapshot.val() && snapshot.val().name) {
+         if (snapshot.val() && (snapshot.val().name || snapshot.val().trips)) {
              resolve(true);
          } else {
              resolve(false);
